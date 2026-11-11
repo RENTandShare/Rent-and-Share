@@ -1,0 +1,117 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile with role, contact info, and verification status",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string", "maxLength": 100 },
+        "email": { "type": "string", "maxLength": 120 },
+        "phone": { "type": "string", "maxLength": 20 },
+        "role": { "type": "string", "enum": ["customer", "owner", "admin"] },
+        "city": { "type": "string", "maxLength": 50 },
+        "avatarUrl": { "type": "string", "maxLength": 500 },
+        "kycStatus": { "type": "string", "enum": ["Not Submitted", "Pending", "Approved", "Rejected"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "name", "email", "role"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Rental equipment listing published by an equipment owner or admin",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string", "maxLength": 200 },
+        "brand": { "type": "string", "maxLength": 100 },
+        "category": { "type": "string", "maxLength": 50 },
+        "subcategory": { "type": "string", "maxLength": 50 },
+        "monthlyRent": { "type": "number" },
+        "securityDeposit": { "type": "number" },
+        "availability": { "type": "boolean" },
+        "ownerId": { "type": "string", "maxLength": 128 },
+        "ownerName": { "type": "string", "maxLength": 100 },
+        "city": { "type": "string", "maxLength": 50 },
+        "rating": { "type": "number" },
+        "reviewCount": { "type": "number" }
+      },
+      "required": ["id", "name", "category", "monthlyRent", "securityDeposit", "ownerId"]
+    },
+    "Booking": {
+      "title": "Booking",
+      "description": "Equipment rental order placed by a customer",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string", "maxLength": 128 },
+        "userName": { "type": "string", "maxLength": 100 },
+        "userEmail": { "type": "string", "maxLength": 120 },
+        "status": { "type": "string", "enum": ["Order Placed", "Confirmed", "KYC Verified", "Out for Delivery", "Delivered", "Active", "Completed", "Cancelled"] },
+        "tenureMonths": { "type": "number" },
+        "monthlyTotal": { "type": "number" },
+        "depositTotal": { "type": "number" },
+        "grandTotal": { "type": "number" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "status", "grandTotal"]
+    },
+    "RepairTicket": {
+      "title": "RepairTicket",
+      "description": "Free doorstep repair maintenance request raised by a renter",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "bookingId": { "type": "string", "maxLength": 128 },
+        "productId": { "type": "string", "maxLength": 128 },
+        "productName": { "type": "string", "maxLength": 200 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "ownerId": { "type": "string", "maxLength": 128 },
+        "issueType": { "type": "string", "maxLength": 100 },
+        "description": { "type": "string", "maxLength": 1000 },
+        "status": { "type": "string", "enum": ["Raised", "Assigned", "Technician Scheduled", "In Progress", "Resolved", "Closed"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "productId", "userId", "issueType", "status"]
+    },
+    "KycRecord": {
+      "title": "KycRecord",
+      "description": "Identity verification submission containing Aadhaar/PAN details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string", "maxLength": 128 },
+        "userEmail": { "type": "string", "maxLength": 120 },
+        "documentType": { "type": "string", "enum": ["Aadhaar", "PAN", "Passport", "Driving License"] },
+        "documentNumber": { "type": "string", "maxLength": 50 },
+        "documentUrl": { "type": "string", "maxLength": 500 },
+        "addressProofUrl": { "type": "string", "maxLength": 500 },
+        "status": { "type": "string", "enum": ["Pending", "Approved", "Rejected"] },
+        "submittedAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "documentType", "documentNumber", "status"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles and account data"
+    },
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Product equipment catalog and listings"
+    },
+    "/bookings/{bookingId}": {
+      "schema": "Booking",
+      "description": "Customer rental booking contracts"
+    },
+    "/repairTickets/{ticketId}": {
+      "schema": "RepairTicket",
+      "description": "Maintenance and repair service requests"
+    },
+    "/kyc/{kycId}": {
+      "schema": "KycRecord",
+      "description": "Identity verification records"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="rsGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F26B21" />
+      <stop offset="100%" stop-color="#D9530F" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="url(#rsGrad)" />
+  <!-- Stylized bold white 'R' wordmark with share connector accents -->
+  <path d="M 20 47 L 20 17 L 33.5 17 C 40.5 17 44.5 20.8 44.5 26.5 C 44.5 31.5 41.2 34.8 36 35.8 L 45 47 L 37.5 47 L 29 36.5 L 27 36.5 L 27 47 Z M 27 31 L 33 31 C 36.2 31 38 29.4 38 26.5 C 38 23.6 36.2 22 33 22 L 27 22 Z" fill="#FFFFFF" />
+  <circle cx="46" cy="18" r="3.5" fill="#FFF3EA" opacity="0.9" />
+</svg>

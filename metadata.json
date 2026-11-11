@@ -1,0 +1,6 @@
+{
+  "name": "Rent and Share",
+  "description": "Share it. Rent it. Use it. India's premium rental marketplace for furniture, appliances, electronics, fitness, tools, events, and agriculture equipment.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
